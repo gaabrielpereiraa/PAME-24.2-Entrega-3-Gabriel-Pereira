@@ -2,23 +2,20 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import { Lolipop } from '../models/lolipop'
 
 interface User {
     email: string;
     password: string;
     username: string;
-    bio: string;
-    followers: number;
-    following: number;
-    posts: string[];
+    lolipops: Lolipop[];
 }
 
 interface UserContextType {
     user: User | null;
     login: (email: string, password: string) => void;
     logout: () => void;
-    register: (email: string, password: string, username: string, bio: string, followers: number, following:number, posts: string[]) => void;
-    makePost: (post: string) => void;
+    register: (email: string, password: string, username: string, lolipops: Lolipop[]) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -49,7 +46,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         
     };
 
-    const register = (email: string, password: string, username: string, bio: string, followers: number, following: number, posts: string[]) => {
+    const register = (email: string, password: string, username: string, lolipops: Lolipop[]) => {
         // Armazena o usuário no localStorage
         const storedUser = localStorage.getItem(email)
         if (storedUser) alert('Email já registrado!');
@@ -58,29 +55,16 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 email,
                 password,
                 username,
-                bio,
-                followers,
-                following,
-                posts: []
+                lolipops: []
             };
             localStorage.setItem(email, JSON.stringify(newUser));
             setUser(newUser);
             alert('Usuário registrado com sucesso!');
         }
     };
-        const makePost = (post : string) => {
-            if (user){
-                const updatedUser = {
-                    ...user,
-                    posts: [...user.posts, post]
-                };
-                setUser(updatedUser);
-                localStorage.setItem(user.email, JSON.stringify(updatedUser));
-                }
-            }
 
     return (
-        <UserContext.Provider value={{ user, login, logout, register, makePost }}>
+        <UserContext.Provider value={{ user, login, logout, register }}>
             {children}
         </UserContext.Provider>
     );

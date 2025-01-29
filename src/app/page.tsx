@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 
 
   return (
-    <div className="max-w-lg mx-auto w-[30vw] h-30 overflow-y-auto">
+    <div className="max-w-lg mx-auto w-[30vw] h-30">
       <div className='mt-[8vh] flex flex-col overflow-y-auto gap-5'>
         {lolipops.map((lolipop) => (
           <Post lolipop={lolipop} key={lolipop.id}></Post>

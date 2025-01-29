@@ -13,7 +13,7 @@ const Cadastro: React.FC = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        register(email, password, username, '', 0, 0, []);
+        register(email, password, username, []);
         router.push('/Login');
     };
   return (
