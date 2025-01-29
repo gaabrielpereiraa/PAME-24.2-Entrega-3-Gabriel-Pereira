@@ -9,8 +9,8 @@ const Sidebar: React.FC = () => {
     const { user } = useUser();
 
     return (
-        <div className="flex">
-        <div className="w-72 bg-white h-screen p-5 border-r border-gray-200 content-center overflow-auto">
+        <div className="flex flex-col">
+        <div className="w-[17vw] bg-white h-[100vh] p-5 border-r border-gray-200 content-center overflow-auto">
             <img src="https://i.postimg.cc/4yZfP6gf/logo.jpg" alt="Logo" className="h-36 w-36 ml-14 mb-24"></img>
             <nav className="space-y-36">
                 <a href="/" className="flex items-center p-2 text-gray-500 rounded-full hover:bg-gray-300">
