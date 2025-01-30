@@ -28,7 +28,7 @@ export default function LolipopDetails({ params }: Props) {
       <div className="w-[83vw] lg:w-1/2 p-10">
         <h1 className="text-5xl font-bold text-gray-800">{loli.name}</h1>
         <p className="text-gray-500 text-2xl mt-4">{loli.comp_desc}</p>
-        <p className="text-4xl font-semibold text-green-600 mt-6">{loli.price}</p>
+        <p className="text-4xl font-semibold text-green-600 mt-6">R$ {loli.price}</p>
 
         {/* Action Buttons */}
         <div className="mt-10">
