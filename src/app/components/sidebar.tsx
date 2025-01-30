@@ -32,18 +32,7 @@ const Sidebar: React.FC = () => {
                     <div className="ml-5 text-lg">Perfil</div>
                 </a>
             </nav>
-            <div className="relative w-full max-w-m flex items-center mt-36">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-                </span>
-            <input 
-                type="text" 
-                placeholder="Buscar" 
-                className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-pink-logo focus:ring-1 focus:ring-pink-logo bg-zinc-700 text-gray-200"
-            />
-            </div>
+            
         </div>
         
     </div>
