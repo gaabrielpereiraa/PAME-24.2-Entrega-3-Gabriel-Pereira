@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lolipop } from '../models/lolipop';
 import Link from 'next/link';
 
@@ -10,6 +10,34 @@ interface PostProps {
 
 
 const Post: React.FC<PostProps> = ({ lolipop }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.lolipops && user.lolipops.some((item: Lolipop) => item.id === lolipop.id)) {
+      setIsFavorited(true);
+    }
+  }, [lolipop.id]);
+
+  const handleFavorite = () => {
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (!user.lolipops) {
+      user.lolipops = [];
+    }
+
+    if (!user.lolipops.some((item : Lolipop) => item.id === lolipop.id)) {
+      user.lolipops.push(lolipop);
+      setIsFavorited(true);
+    }
+    else{
+      user.lolipops = user.lolipops.filter((item: Lolipop) => item.id !== lolipop.id);
+      setIsFavorited(false);  
+    }
+
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md border border-gray-300">
       {/* Product Image */}
@@ -29,9 +57,12 @@ const Post: React.FC<PostProps> = ({ lolipop }) => {
           <a className="flex-1 bg-pink-logo hover:bg-pink-900 text-white font-bold py-2 px-4 rounded-lg transition text-center" href={`Lolipop/${lolipop.id}`}>
             Ver mais detalhes
           </a>
-        <a className="flex-1 bg-red-600 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-lg transition text-center">
-          Favoritar
-        </a>
+          <button
+          onClick={handleFavorite}
+          className={`flex-1 ${isFavorited ? 'bg-red-700' : 'bg-red-600'} hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition`}
+        >
+          {isFavorited ? 'Favoritado' : 'Favoritar'}
+        </button>
       </div>
     </div>
   );
