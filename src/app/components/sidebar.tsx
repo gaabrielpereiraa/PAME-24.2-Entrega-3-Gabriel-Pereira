@@ -7,6 +7,8 @@ import { useUser } from '../context/UserContext';
 const Sidebar: React.FC = () => {
     const router = useRouter();
     const { user } = useUser();
+    
+    const displayName = user?.username || "Login";
 
     return (
         <div className="flex flex-col">
@@ -29,7 +31,7 @@ const Sidebar: React.FC = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-10 h-10">
                     <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.333 0-10 1.667-10 5v3h20v-3c0-3.333-6.667-5-10-5z"/>
                 </svg>
-                    <div className="ml-5 text-lg">Perfil</div>
+                    <div className="ml-5 text-lg">{displayName}</div>
                 </a>
             </nav>
             

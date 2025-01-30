@@ -14,8 +14,8 @@ const Login: React.FC = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         login(email, password);
-        router.push('/');
         if (user) alert('Logado com sucesso!')
+        router.push('/');
     };
   return (
     <div className="w-screen h-screen flex bg-white items-center" >
