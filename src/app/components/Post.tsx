@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { Lolipop } from "../models/lolipop";
 import Link from "next/link";
@@ -11,14 +10,20 @@ const Post: React.FC<PostProps> = ({ lolipop }) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    if (user.lolipops && user.lolipops.some((item: Lolipop) => item.id === lolipop.id)) {
-      setIsFavorited(true);
+    const email = localStorage.getItem("email");
+    if (email) {
+      const storedUser = JSON.parse(localStorage.getItem(email) || "{}");
+      if (storedUser.lolipops && storedUser.lolipops.some((item: Lolipop) => item.id === lolipop.id)) {
+        setIsFavorited(true);
+      }
     }
   }, [lolipop.id]);
 
   const handleFavorite = () => {
-    let user = JSON.parse(localStorage.getItem("user") || "{}");
+    const email = localStorage.getItem("email");
+    if (!email) return;
+
+    let user = JSON.parse(localStorage.getItem(email) || "{}");
 
     if (!user.lolipops) {
       user.lolipops = [];
@@ -32,7 +37,8 @@ const Post: React.FC<PostProps> = ({ lolipop }) => {
       setIsFavorited(false);
     }
 
-    localStorage.setItem("user", JSON.stringify(user));
+    // Save the updated user object back to localStorage
+    localStorage.setItem(email, JSON.stringify(user));
   };
 
   return (

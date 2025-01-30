@@ -7,13 +7,19 @@ const Favorites: React.FC = () => {
   const [favorites, setFavorites] = useState<Lolipop[]>([]);
 
   useEffect(() => {
-    // Retrieve user data from localStorage
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    if (user.lolipops) {
-      setFavorites(user.lolipops);
-    }
-  }, []);
+    // Retrieve the current user data from localStorage
+    const email = localStorage.getItem("email");
+    if (!email) return;
 
+    let user = JSON.parse(localStorage.getItem(email) || "{}");
+
+    // Check if the user has any favorited lolipops
+    if (user && user.lolipops) {
+      setFavorites(user.lolipops);  // Set the favorites from the current user
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+    
   return (
     <div className="w-full max-w-4xl mx-auto p-6 overflow-x-hidden">
       {/* Title */}
