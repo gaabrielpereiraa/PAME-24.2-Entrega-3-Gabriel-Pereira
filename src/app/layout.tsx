@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="bg-white flex"><UserProvider>
+        <div className="bg-white flex w-[100vw] h-[100vh]"><UserProvider>
             <Sidebar></Sidebar>
             <UserInitializer />
             {children}
